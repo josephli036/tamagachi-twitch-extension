@@ -12,6 +12,7 @@ const errorHandler = (error, req, res, next) => {
 }
 
 const authHandler = async (req, res, next) => {
+    // TODO(): Work on Auth
     if (process.env.NODE_ENV === 'development') {
         const token = {
             "exp": 1484242525,

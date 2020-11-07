@@ -44,7 +44,7 @@
     "installationCount": -42,
     "liveConfigUrl": "",
     "name": "tamagachi-project",
-    "panelHeight": 300,
+    "panelHeight": 500,
     "privacyPolicyUrl": "",
     "requestIdentityLink": false,
     "requiredBroadcasterAbilities": [],
@@ -64,7 +64,7 @@
     "views": {
       "panel": {
         "viewerUrl": "http://localhost:8081/panel",
-        "height": 300,
+        "height": 500,
         "canLinkExternalContent": false
       },
       "config": {

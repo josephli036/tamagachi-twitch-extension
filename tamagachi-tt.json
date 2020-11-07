@@ -1,0 +1,83 @@
+{
+  "allowHttpBackend": false,
+  "backendCommand": "",
+  "backendFolderName": "",
+  "certificateExceptions": [],
+  "extensionViews": [
+    {
+      "channelId": "109079941",
+      "configurationAnchor": "panel",
+      "displayChannelName": "tiirent",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "1",
+      "isPopout": false,
+      "label": "mn",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "panel",
+      "viewerType": "Broadcaster"
+    }
+  ],
+  "manifest": {
+    "anchor": "panel",
+    "assetUrls": [],
+    "authorName": "",
+    "bitsEnabled": false,
+    "canInstall": true,
+    "configUrl": "http://localhost:8080/config.html",
+    "configurationLocation": "none",
+    "description": "",
+    "eulaTosUrl": "",
+    "hasChatSupport": false,
+    "iconUrl": "",
+    "iconUrls": {},
+    "id": "vergwm09iezqr9kiw1ga5rxr9gf6q2",
+    "installationCount": -42,
+    "liveConfigUrl": "",
+    "name": "tamagachi-tt",
+    "panelHeight": 300,
+    "privacyPolicyUrl": "",
+    "requestIdentityLink": false,
+    "requiredBroadcasterAbilities": [],
+    "screenshotUrls": [],
+    "sku": "",
+    "state": "Testing",
+    "subscriptionsSupportLevel": "none",
+    "summary": "",
+    "supportEmail": "",
+    "vendorCode": "",
+    "version": "0.0.1",
+    "viewerSummary": "",
+    "viewerUrl": "http://localhost:8080/panel",
+    "viewerUrls": {
+      "panel": "http://localhost:8080/panel"
+    },
+    "views": {
+      "panel": {
+        "viewerUrl": "http://localhost:8080/panel",
+        "height": 300,
+        "canLinkExternalContent": false
+      },
+      "config": {
+        "viewerUrl": "http://localhost:8080/config.html",
+        "canLinkExternalContent": false
+      }
+    },
+    "whitelistedConfigUrls": [],
+    "whitelistedPanelUrls": []
+  },
+  "frontendCommand": "npm run serve",
+  "frontendFolderName": "twitch-tamagachi",
+  "name": "tamagachi-tt",
+  "usingRandomFrontendHostingPort": false,
+  "version": 3
+}

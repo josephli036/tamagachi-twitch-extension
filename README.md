@@ -9,4 +9,4 @@ Install dependencies
 `npm install`
 
 Then to run the app
-`npm run server`
+`npm run serve`

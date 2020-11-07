@@ -1,0 +1,83 @@
+{
+  "allowHttpBackend": false,
+  "backendCommand": "npm run start",
+  "backendFolderName": "twitch-tamagachi-backend",
+  "certificateExceptions": [],
+  "extensionViews": [
+    {
+      "channelId": "604530324",
+      "configurationAnchor": "panel",
+      "displayChannelName": "chickenpoxbilly",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "1",
+      "isPopout": false,
+      "label": "panel",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "panel",
+      "viewerType": "Broadcaster"
+    }
+  ],
+  "manifest": {
+    "anchor": "panel",
+    "assetUrls": [],
+    "authorName": "",
+    "bitsEnabled": false,
+    "canInstall": true,
+    "configUrl": "http://localhost:8080/config.html",
+    "configurationLocation": "none",
+    "description": "",
+    "eulaTosUrl": "",
+    "hasChatSupport": false,
+    "iconUrl": "",
+    "iconUrls": {},
+    "id": "om8ka013znl2qg2nrjwstwip4t8oqb",
+    "installationCount": -42,
+    "liveConfigUrl": "",
+    "name": "tamagachi-at",
+    "panelHeight": 300,
+    "privacyPolicyUrl": "",
+    "requestIdentityLink": false,
+    "requiredBroadcasterAbilities": [],
+    "screenshotUrls": [],
+    "sku": "",
+    "state": "Testing",
+    "subscriptionsSupportLevel": "none",
+    "summary": "",
+    "supportEmail": "",
+    "vendorCode": "",
+    "version": "0.0.1",
+    "viewerSummary": "",
+    "viewerUrl": "http://localhost:8080/panel.html",
+    "viewerUrls": {
+      "panel": "http://localhost:8080/panel.html"
+    },
+    "views": {
+      "panel": {
+        "viewerUrl": "http://localhost:8080/panel.html",
+        "height": 300,
+        "canLinkExternalContent": false
+      },
+      "config": {
+        "viewerUrl": "http://localhost:8080/config.html",
+        "canLinkExternalContent": false
+      }
+    },
+    "whitelistedConfigUrls": [],
+    "whitelistedPanelUrls": []
+  },
+  "frontendCommand": "npm run serve",
+  "frontendFolderName": "twitch-tamagachi",
+  "name": "tamagachi-at",
+  "usingRandomFrontendHostingPort": false,
+  "version": 3
+}

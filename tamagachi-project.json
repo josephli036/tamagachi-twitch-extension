@@ -1,0 +1,83 @@
+{
+  "allowHttpBackend": false,
+  "backendCommand": "",
+  "backendFolderName": "",
+  "certificateExceptions": [],
+  "extensionViews": [
+    {
+      "channelId": "68129470",
+      "configurationAnchor": "panel",
+      "displayChannelName": "mxpurple",
+      "features": {
+        "isBitsEnabled": false,
+        "isChatEnabled": false,
+        "isSubscriptionStatusAvailable": false
+      },
+      "frameSize": {
+        "width": 1280,
+        "height": 720
+      },
+      "id": "1",
+      "isPopout": false,
+      "label": "Panel",
+      "linked": false,
+      "linkedUserId": "",
+      "orientation": "Portrait",
+      "type": "panel",
+      "viewerType": "Broadcaster"
+    }
+  ],
+  "manifest": {
+    "anchor": "panel",
+    "assetUrls": [],
+    "authorName": "Mxpurple",
+    "bitsEnabled": false,
+    "canInstall": true,
+    "configUrl": "http://localhost:8081/config.html",
+    "configurationLocation": "none",
+    "description": "",
+    "eulaTosUrl": "",
+    "hasChatSupport": false,
+    "iconUrl": "",
+    "iconUrls": {},
+    "id": "mnny88d2hpuk9k4afgw4z0e24vbffn",
+    "installationCount": -42,
+    "liveConfigUrl": "",
+    "name": "tamagachi-project",
+    "panelHeight": 300,
+    "privacyPolicyUrl": "",
+    "requestIdentityLink": false,
+    "requiredBroadcasterAbilities": [],
+    "screenshotUrls": [],
+    "sku": "",
+    "state": "Testing",
+    "subscriptionsSupportLevel": "none",
+    "summary": "",
+    "supportEmail": "josephli036@gmail.com",
+    "vendorCode": "",
+    "version": "0.0.1",
+    "viewerSummary": "",
+    "viewerUrl": "http://localhost:8081/panel",
+    "viewerUrls": {
+      "panel": "http://localhost:8081/panel"
+    },
+    "views": {
+      "panel": {
+        "viewerUrl": "http://localhost:8081/panel",
+        "height": 300,
+        "canLinkExternalContent": false
+      },
+      "config": {
+        "viewerUrl": "http://localhost:8081/config.html",
+        "canLinkExternalContent": false
+      }
+    },
+    "whitelistedConfigUrls": [],
+    "whitelistedPanelUrls": []
+  },
+  "frontendCommand": "npm run serve",
+  "frontendFolderName": "twitch-tamagachi",
+  "name": "tamagachi-project",
+  "usingRandomFrontendHostingPort": false,
+  "version": 3
+}

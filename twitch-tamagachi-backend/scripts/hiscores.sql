@@ -8,28 +8,6 @@ CREATE TABLE hiscores (
 	PRIMARY KEY (channel_id, opaque_user_id)
 );
 
-DROP TABLE dailyConstants;
-CREATE TABLE dailyConstants (
-    channel_id VARCHAR(30),
-    attack_modifier BIGINT,
-    jump_modifier BIGINT,
-    shield_modifier BIGINT,
-    focus_modifier BIGINT,
-    battle_formula BIGINT,
-    PRIMARY KEY (channel_id)
-)
-
-DROP TABLE users;
-CREATE TABLE users (
-    user_id VARCHAR(30),
-    attack_stat BIGINT,
-    jump_stat BIGINT,
-    shield_stat BIGINT,
-    focus_stat BIGINT,
-    currency BIGINT,
-    PRIMARY KEY (user_id)
-)
-
 INSERT INTO hiscores (channel_id,user_id,opaque_user_id, last_updated,points) VALUES ('test_channel', 'user1', 'Uuser1', current_timestamp, 10);
 INSERT INTO hiscores (channel_id,user_id,opaque_user_id, last_updated,points) VALUES ('test_channel', 'user2', 'Uuser2', current_timestamp, 10);
 INSERT INTO hiscores (channel_id,user_id,opaque_user_id, last_updated,points) VALUES ('test_channel', 'user3', 'Uuser3', current_timestamp, 10);

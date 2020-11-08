@@ -54,11 +54,25 @@
 <script>
 
   export default {
+    props: {
+      attack: {
+        type: String,
+        required: true,
+      },
+      shield: {
+        type: String,
+        required: true,
+      },
+      focus: {
+        type: String,
+        required: true,
+      },
+      jump: {
+        type: String,
+        required: true,
+      },
+    },
     data: () => ({
-      attack: 0,
-      shield: 0,
-      focus: 0,
-      jump: 0,
     }),
 
     components: {

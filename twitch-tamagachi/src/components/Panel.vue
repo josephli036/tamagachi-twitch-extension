@@ -1,6 +1,9 @@
 <template>
   <v-card class="pa-0" height="500" width="300">
-    <v-row>
+    <v-row no-gutters>
+      <point-display :points="points"/>
+    </v-row>
+    <v-row no-gutters>
       <stat-banner
         :attack="attack"
         :shield="shield"
@@ -28,21 +31,24 @@
 import BackendApi from "../services/backend.js";
 import StatBanner from "../components/StatBanner.vue";
 import UpgradeButton from "../components/UpgradeButton.vue";
+import PointDisplay from "../components/PointDisplay.vue";
 
 export default {
   name: "Panel",
   components: {
     UpgradeButton,
     StatBanner,
+    PointDisplay,
   },
   mixins: [],
   data() {
     return {
-      attack: 0,
-      shield: 0,
-      focus: 0,
-      jump: 0,
-      spend: 0,
+      attack: "1",
+      shield: "2",
+      focus: "3",
+      jump: "4",
+      spend: "0",
+      points: "0"
     };
   },
   computed: {},
@@ -51,6 +57,7 @@ export default {
   },
   methods: {
     onUpgrade({ attribute, type }) {
+      const instance = this;
       BackendApi.upgrade(
         window.Twitch.ext.viewer.id,
         window.channelId,
@@ -58,31 +65,35 @@ export default {
         type,
         window.authToken
       ).then((data) => {
-        this.attack = data.attack_stat;
-        this.shield = data.shield_stat;
-        this.focus = data.focus_stat;
-        this.jump = data.jump_stat;
+        instance.attack = String(data.attack_stat);
+        instance.shield = String(data.shield_stat);
+        instance.focus = String(data.focus_stat);
+        instance.jump = String(data.jump_stat);
+        instance.points = String(data.points_to_spend);
         console.log(data);
       });
     },
 
     updatePoints() {
+      const instance = this;
       BackendApi.updatePoints(
         window.Twitch.ext.viewer.id,
         window.channelId,
         window.authToken
       ).then(data => {
-        this.attack = data.attack_stat;
-        this.shield = data.shield_stat;
-        this.focus = data.focus_stat;
-        this.jump = data.jump_stat;
+        instance.attack = String(data.attack_stat);
+        instance.shield = String(data.shield_stat);
+        instance.focus = String(data.focus_stat);
+        instance.jump = String(data.jump_stat);
+        instance.points = String(data.points_to_spend);
         console.log(data);
       });
     },
   },
   created() {
+    const instance = this;
     setInterval(() => {
-      this.updatePoints();
+      instance.updatePoints();
     }, 30000);
   },
 };

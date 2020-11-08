@@ -10,8 +10,9 @@ hiscoresRouter.get('/', async (req,res) => {
      * NOTE: If the length is 11, then that means there may be a large gap between the lowest rank and 10
     */
     const currentUserId = res.locals.token.user_id
-    const hiscorePlayersQuery = 'SELECT channel_id, user_id, last_updated, total_points, attack_stat, jump_stat, shield_stat, focus_stat, RANK() OVER(ORDER BY total_points DESC) player_rank FROM players ORDER BY total_points DESC LIMIT 10'
-    const hiscorePlayers = (await client.query(hiscorePlayersQuery)).rows
+    const channelId = res.locals.token.channel_id
+    const hiscorePlayersQuery = 'SELECT channel_id, user_id, last_updated, total_points, attack_stat, jump_stat, shield_stat, focus_stat, RANK() OVER(ORDER BY total_points DESC) player_rank FROM players WHERE user_id = $1 and channel_id = $2 ORDER BY total_points DESC LIMIT 10'
+    const hiscorePlayers = (await client.query(hiscorePlayersQuery, [currentUserId, channelId])).rows
 
     let missingPlayer = true
     for (const hiscorePlayer of hiscorePlayers) {

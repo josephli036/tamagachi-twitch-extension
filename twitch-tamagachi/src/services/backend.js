@@ -1,6 +1,19 @@
 import HTTP from "./common.js";
 
 export default {
+  getLeaderboard(userId, channelId, authToken) {
+    return HTTP({
+      method: "get",
+      url: "hiscores",
+      data: {
+        userId: userId,
+        channelId: channelId,
+      },
+      headers: {
+        authorization: `Bearer ${authToken}`,
+      },
+    }).then((response) => response.data);
+  },
   /**
    * @typedef {integer} userId
    * @typedef {integer} channelId

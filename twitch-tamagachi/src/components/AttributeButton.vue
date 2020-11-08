@@ -2,7 +2,7 @@
   <v-fab-transition>
     <v-speed-dial
       direction="top"
-      transition="slide-x-reverse-transition"
+      transition="slide-y-reverse-transition"
       style="padding-right: 10px; padding-left: 10px"
       open-on-hover
     >

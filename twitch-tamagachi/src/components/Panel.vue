@@ -1,9 +1,9 @@
 <template>
-  <v-card height=500>
-    <v-container>
+  <v-card class="pa-0" height="500">
+    <v-container py-0>
       <v-row>
-        <v-col cols=5 offset=7>
-          upgrades
+        <v-col class="pa-0" cols="5" offset="7">
+          <upgrade-options />
         </v-col>
       </v-row>
     </v-container>
@@ -11,9 +11,13 @@
 </template>
 
 <script>
+import UpgradeOptions from "../components/UpgradeOptions.vue";
+
 export default {
   name: "Panel",
-  components: {},
+  components: {
+    UpgradeOptions,
+  },
   mixins: [],
   data() {
     return {};

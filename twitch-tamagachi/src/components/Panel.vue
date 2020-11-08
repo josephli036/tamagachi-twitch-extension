@@ -24,6 +24,7 @@
         </div>
       </div>
     </v-overlay>
+    <point-counter :value="counter"/>
   </v-card>
 </template>
 
@@ -32,6 +33,7 @@ import BackendApi from "../services/backend.js";
 import StatBanner from "../components/StatBanner.vue";
 import UpgradeButton from "../components/UpgradeButton.vue";
 import PointDisplay from "../components/PointDisplay.vue";
+import PointCounter from "../components/PointCounter.vue";
 
 export default {
   name: "Panel",
@@ -39,6 +41,7 @@ export default {
     UpgradeButton,
     StatBanner,
     PointDisplay,
+    PointCounter,
   },
   mixins: [],
   data() {
@@ -48,7 +51,8 @@ export default {
       focus: "3",
       jump: "4",
       spend: "0",
-      points: "0"
+      points: "0",
+      counter: "0"
     };
   },
   computed: {},
@@ -86,6 +90,7 @@ export default {
         instance.focus = String(data.focus_stat);
         instance.jump = String(data.jump_stat);
         instance.points = String(data.points_to_spend);
+        instance.counter = "0";
         console.log(data);
       });
     },

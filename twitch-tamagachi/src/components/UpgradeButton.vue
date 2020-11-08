@@ -1,38 +1,28 @@
 <template>
-  <div class="upgrade-button d-flex" style="flex-direction: column">
-    <div class="d-flex">
-      <div class="pa-0">
-        <div class="d-flex align-center justify-center" style="flex-direction:column">
+    <div class="d-flex" style="flex-direction: column; height:384px">
+      <v-spacer />
+      <div class="d-flex">
+        <v-spacer />
+        <div class="upgrade-button d-flex align-center">
           <attribute-button
-            color="amber lighten-2"
-            icon="mdi-run-fast"
+            color="deep-orange lighten-1"
+            icon="mdi-sword-cross"
+            :right=true
             v-show="open"
-            @upgrade="$emit('upgrade', { attribute: 'jump', type: arguments[0] })"
-          />
-
-          <attribute-button
-            color="light-green lighten-2"
-            icon="mdi-brain"
-            v-show="open"
-            @upgrade="$emit('upgrade', { attribute: 'focus', type: arguments[0] })"
+            @upgrade="$emit('upgrade', { attribute: 'attack', type: arguments[0] })"
           />
 
           <attribute-button
             color="light-blue lighten-2"
             icon="mdi-shield"
+            :right=true
             v-show="open"
             @upgrade="$emit('upgrade', { attribute: 'shield', type: arguments[0] })"
           />
 
-          <attribute-button
-            color="deep-orange lighten-1"
-            icon="mdi-sword-cross"
-            v-show="open"
-            @upgrade="$emit('upgrade', { attribute: 'attack', type: arguments[0] })"
-          />
           <v-tooltip
             min-width="84px"
-            left
+            top
             color="purple lighten-4"
           >
             <template v-slot:activator="{ on, attrs }">
@@ -58,10 +48,27 @@
               <span v-else>Upgrade</span>
             </div>
           </v-tooltip>
+
+          <attribute-button
+            color="light-green lighten-2"
+            icon="mdi-brain"
+            :right=false
+            v-show="open"
+            @upgrade="$emit('upgrade', { attribute: 'focus', type: arguments[0] })"
+          />
+
+          <attribute-button
+            color="amber lighten-2"
+            icon="mdi-run-fast"
+            :right=false
+            v-show="open"
+            @upgrade="$emit('upgrade', { attribute: 'jump', type: arguments[0] })"
+          />
+
         </div>
+        <v-spacer />
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -87,9 +94,15 @@ import AttributeButton from "../components/AttributeButton.vue"
 
 <style>
 .upgrade-button {
-  position:absolute;
-  bottom:0;
-  right:0;
+  /* position:absolute;
+  bottom:10px;
+  left:40%;
+  z-index: 1; */
   z-index: 1;
+}
+.upgrade-wrapper {
+  position: absolute;
+  bottom: 10px;
+
 }
 </style>

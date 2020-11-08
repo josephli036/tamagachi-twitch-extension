@@ -35,7 +35,7 @@ export default {
     updatePoints() {
       setInterval(() => {
         BackendApi.updatePoints(window.Twitch.ext.viewer.id, window.channelId, window.authToken)
-      }, 10000)
+      }, 30000)
     }
   },
   created () {

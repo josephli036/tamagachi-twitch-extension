@@ -14,7 +14,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn icon>
+        <v-btn icon @click="$emit('leaderboardClose')">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-app-bar>

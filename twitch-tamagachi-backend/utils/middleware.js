@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../utils/config')
 
 const unknownEndpoint = (req, res) => {
+    console.log("Unkown endpoint:", req)
     res.status(404).send({error : 'unknown endpoint'})
 }
 
@@ -42,7 +43,8 @@ const authHandler = async (req, res, next) => {
                 console.log('Authorized')
                 next()
             }
-        } catch {
+        } catch (e) {
+            console.log("error: ", e.message)
             return res.status(401).json({error: new Error('invalid request')})
         }
     }

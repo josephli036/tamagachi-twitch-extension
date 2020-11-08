@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <div class="d-flex align-center justify-center" style="flex-direction:column">
+    <div
+      class="d-flex align-center justify-center"
+      style="flex-direction: column"
+    >
       <attribute-button
         color="amber lighten-2"
         icon="mdi-run-fast"
@@ -33,34 +36,28 @@
         align-self="center"
         @click="open = !open"
       >
-        <v-icon v-if="open">
-          mdi-close
-        </v-icon>
-        <v-icon v-else>
-          mdi-chevron-up-circle
-        </v-icon>
+        <v-icon v-if="open"> mdi-close </v-icon>
+        <v-icon v-else> mdi-chevron-up-circle </v-icon>
       </v-btn>
     </div>
   </v-container>
 </template>
 
 <script>
-import AttributeButton from "../components/AttributeButton.vue"
+import AttributeButton from "../components/AttributeButton.vue";
 
-  export default {
-    data: () => ({
-      open: false,
-      transition: 'slide-y-reverse-transition',
-    }),
+export default {
+  data: () => ({
+    open: false,
+    transition: "slide-y-reverse-transition",
+  }),
 
-    components: {
-      AttributeButton,
-    },
+  components: {
+    AttributeButton,
+  },
 
-    computed: {
-    },
+  computed: {},
 
-    watch: {
-    },
-  }
+  watch: {},
+};
 </script>

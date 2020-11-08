@@ -12,11 +12,7 @@
         >
           <!-- Upgrade button -->
           <template v-slot:activator>
-            <v-tooltip
-              min-width="84px"
-              left
-              color="purple lighten-4"
-            >
+            <v-tooltip min-width="84px" left color="purple lighten-4">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   v-model="fab"
@@ -27,12 +23,8 @@
                   v-on="on"
                   depressed
                 >
-                  <v-icon v-if="fab">
-                    mdi-close
-                  </v-icon>
-                  <v-icon v-else>
-                    mdi-chevron-up-circle
-                  </v-icon>
+                  <v-icon v-if="fab"> mdi-close </v-icon>
+                  <v-icon v-else> mdi-chevron-up-circle </v-icon>
                 </v-btn>
               </template>
               <div style="text-align: center; width: 100%">
@@ -48,13 +40,7 @@
             transition="slide-x-reverse-transition"
           >
             <template v-slot:activator>
-              <v-btn
-                color="deep-orange lighten-1"
-                dark
-                fab
-                small
-                depressed
-              >
+              <v-btn color="deep-orange lighten-1" dark fab small depressed>
                 <v-icon>mdi-sword-cross</v-icon>
               </v-btn>
             </template>
@@ -69,16 +55,10 @@
             >
               <v-icon>mdi-numeric-positive-1</v-icon>
             </v-btn>
-
-
           </v-speed-dial>
 
           <!-- Defense button -->
-          <v-tooltip
-            min-width="84px"
-            left
-            color="light-blue lighten-2"
-          >
+          <v-tooltip min-width="84px" left color="light-blue lighten-2">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 fab
@@ -98,11 +78,7 @@
           </v-tooltip>
 
           <!-- Sanity button -->
-          <v-tooltip
-            min-width="84px"
-            left
-            color="light-green lighten-2"
-          >
+          <v-tooltip min-width="84px" left color="light-green lighten-2">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 fab
@@ -122,11 +98,7 @@
           </v-tooltip>
 
           <!-- Speed button -->
-          <v-tooltip
-            min-width="84px"
-            left
-            color="amber lighten-2"
-          >
+          <v-tooltip min-width="84px" left color="amber lighten-2">
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 fab
@@ -151,31 +123,29 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      direction: 'bottom',
-      att: false,
-      fab: false,
-      fling: false,
-      hover: false,
-      tabs: null,
-      top: false,
-      right: true,
-      bottom: true,
-      left: false,
-      transition: 'slide-y-reverse-transition',
-    }),
+export default {
+  data: () => ({
+    direction: "bottom",
+    att: false,
+    fab: false,
+    fling: false,
+    hover: false,
+    tabs: null,
+    top: false,
+    right: true,
+    bottom: true,
+    left: false,
+    transition: "slide-y-reverse-transition",
+  }),
 
-    computed: {
-    },
+  computed: {},
 
-    watch: {
-    },
-  }
+  watch: {},
+};
 </script>
 
 <style>
-  #create .v-btn--floating {
-    position: relative;
-  }
+#create .v-btn--floating {
+  position: relative;
+}
 </style>

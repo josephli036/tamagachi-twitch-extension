@@ -5,7 +5,7 @@ import router from "./router";
 
 Vue.config.productionTip = false;
 
-window.Twitch.ext.onAuthorized(function(auth) {
+window.Twitch.ext.onAuthorized(function (auth) {
   window.authToken = auth.token;
   window.channelId = auth.channelId;
   console.log(window.authToken);

@@ -1,6 +1,8 @@
 <template>
-  <attribute-selection-menu v-if="!showUpgradeOptions" @attributeClick="onAttributeClick"/>
-  <upgrade-selection-menu v-else @upgradeClick="onUpgradeClick"/>
+  <v-slide-x-reverse-transition hide-on-leave>
+    <attribute-selection-menu v-if="!showUpgradeOptions" @attributeClick="onAttributeClick"/>
+    <upgrade-selection-menu v-else @upgradeClick="onUpgradeClick"/>
+  </v-slide-x-reverse-transition>
 </template>
 
 <script>

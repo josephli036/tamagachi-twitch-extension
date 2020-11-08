@@ -34,6 +34,8 @@ export default {
     onUpgradeClick(type) {
       if (type === "back") {
         this.currentAttribute = null;
+      } else {
+        this.$emit("upgrade", {attribute: this.currentAttribute, type: type});
       }
     },
   },

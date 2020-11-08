@@ -20,11 +20,16 @@ upgradesRouter.post('/attempt', async (req,res) => {
     //upgrade related variables
     let upgradedValue = 0
     let success = false
-    const cost = req.body.cost
+    const typeDefinition = {
+        5: [5, .1, 200],
+        3: [3, .6, 125],
+        1: [1, .95, 75]
+    }
+    const cost = typeDefinition[req.body.upgradeType][2]
     const attribute = req.body.attribute
-    if (seed <= req.body.chance) {
+    if (seed <= typeDefinition[req.body.upgradeType][1]) {
         //Successfully upgraded increment effected attribute
-        upgradedValue += req.body.increment
+        upgradedValue += typeDefinition[req.body.upgradeType][0]
         success = true
     }
 

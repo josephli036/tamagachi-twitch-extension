@@ -11,6 +11,7 @@ app.use(express.json())
 
 app.use('/api/hiscores', authHandler, hiscoresRouter)
 app.use('/api/players', authHandler, playersRouter)
+app.use('/api/upgrades', authHandler, upgradesRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

@@ -33,8 +33,6 @@ upgradesRouter.post('/attempt', async (req,res) => {
         success = true
     }
 
-    console.log(res.locals.token)
-
     const currentUserId = res.locals.token.user_id
     const channelId = res.locals.token.channel_id
     // TODO(): Fix user not existing.

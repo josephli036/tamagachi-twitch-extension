@@ -7,8 +7,7 @@ upgradesRouter.get('/', async (req,res) => {
      * TODO when we want dynamic upgrades that change
      * Get the available upgrades for the session, attribute, increment value, 
     */
-
-    res.status(200).json(hiscoreMembers).end()
+    return res.status(200).json('penis').end()
 })
 
 upgradesRouter.post('/attempt', async (req,res) => {
@@ -23,7 +22,6 @@ upgradesRouter.post('/attempt', async (req,res) => {
     let success = false
     const cost = req.body.cost
     const attribute = req.body.attribute
-
     if (seed <= req.body.chance) {
         //Successfully upgraded increment effected attribute
         upgradedValue += req.body.increment
@@ -34,7 +32,7 @@ upgradesRouter.post('/attempt', async (req,res) => {
     const currentUserId = res.locals.token.user_id
     const channelId = res.locals.token.channel_id
     const playerQuery = 'SELECT * FROM players WHERE opaque_user_id = $1'
-    const player = (await client.query(playerQuery, [currentOpaqueUserId])).rows
+    let player = (await client.query(playerQuery, [currentOpaqueUserId])).rows
     //dictionary representing delta for stats
     let differenceStat = {
         'attack': 0,
@@ -44,18 +42,25 @@ upgradesRouter.post('/attempt', async (req,res) => {
     }
     //upgrade attribute by specified value
     differenceStat[attribute] += upgradedValue
-
     let lastUpdated = player[0].last_updated
+    let singlePlayer = player[0]
     const updatePlayerQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE opaque_user_id = $2 and channel_id = $3'
     //update players table to decrease points and increase stat
-    await client.query(updatePlayerQuery, [player.points-cost, currentOpaqueUserId, channelId, player.attack_stat + differenceStat['attack'], 
-        player.jump_stat + differenceStat['jump'], player.shield_stat + differenceStat['shield'], player.focus_stat + differenceStat['focus']])
+    await client.query(updatePlayerQuery, 
+        [Number(singlePlayer.points_to_spend) - Number(cost), 
+        currentOpaqueUserId, 
+        channelId, 
+        Number(singlePlayer.attack_stat) + Number(differenceStat['attack']), 
+        Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
+        Number(singlePlayer.shield_stat) + Number(differenceStat['shield']), 
+        Number(singlePlayer.focus_stat) + Number(differenceStat['focus'])]
+    );
         const updatedPlayer = {...player,
-                                points_to_spend:Number(player.points_to_spend) - cost,
-                                attack_stat: Number(player.attack_stat) + Number(differenceStat['attack']),
-                                jump_stat: Number(player.jump_stat) + Number(differenceStat['jump']),
-                                shield_stat: Number(player.shield_stat) + Number(differenceStat['shield']),
-                                focus_stat: Number(player.focus_stat) + Number(differenceStat['focus']),
+                                points_to_spend:Number(singlePlayer.points_to_spend) - Number(cost),
+                                attack_stat: Number(singlePlayer.attack_stat) + Number(differenceStat['attack']),
+                                jump_stat: Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
+                                shield_stat: Number(singlePlayer.shield_stat) + Number(differenceStat['shield']),
+                                focus_stat: Number(singlePlayer.focus_stat) + Number(differenceStat['focus']),
                                 success: success
                             }
        return res.status(200).json(updatedPlayer)

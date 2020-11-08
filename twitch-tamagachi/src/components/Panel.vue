@@ -1,24 +1,31 @@
 <template>
   <v-card class="pa-0" height="500" width="300">
-    <v-container py-0>
-      <v-row>
-        <v-col class="pa-0" cols="5" offset="7">
-          <upgrade-button />
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-overlay
+      absolute
+      opacity=0
+    >
+      <div class="d-flex fill-height" style="flex-direction:column">
+        <v-spacer></v-spacer>
+        <div class="d-flex">
+          <v-spacer></v-spacer>
+          <div class="pa-0"><upgrade /></div>
+        </div>
+      </div>
+
+    </v-overlay>
   </v-card>
 </template>
 
 <script>
 import BackendApi from "../services/backend.js";
 // import UpgradeOptions from "../components/UpgradeOptions.vue";
-import UpgradeButton from "../components/UpgradeButton.vue";
+// import UpgradeButton from "../components/UpgradeButton.vue";
+import Upgrade from "../components/Upgrade.vue"
 
 export default {
   name: "Panel",
   components: {
-    UpgradeButton,
+    Upgrade,
   },
   mixins: [],
   data() {
@@ -35,3 +42,10 @@ export default {
   },
 };
 </script>
+
+<style>
+  .v-overlay__content {
+    height: 100%;
+    width: 100%;
+  }
+</style>

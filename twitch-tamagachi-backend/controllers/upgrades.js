@@ -1,4 +1,5 @@
 const upgradesRouter = require('express').Router()
+const { json } = require('express')
 const { client } = require('../client')
 
 upgradesRouter.get('/', async (req,res) => {
@@ -23,7 +24,7 @@ upgradesRouter.post('/attempt', async (req,res) => {
     const cost = req.body.cost
     const attribute = req.body.attribute
 
-    if (seed >= req.body.chance) {
+    if (seed <= req.body.chance) {
         //Successfully upgraded increment effected attribute
         upgradedValue += req.body.increment
         success = true
@@ -33,7 +34,7 @@ upgradesRouter.post('/attempt', async (req,res) => {
     const currentUserId = res.locals.token.user_id
     const channelId = res.locals.token.channel_id
     const playerQuery = 'SELECT * FROM players WHERE opaque_user_id = $1'
-    let player = (await client.query(playerQuery, [currentOpaqueUserId])).rows
+    const player = (await client.query(playerQuery, [currentOpaqueUserId])).rows
     //dictionary representing delta for stats
     let differenceStat = {
         'attack': 0,
@@ -44,30 +45,21 @@ upgradesRouter.post('/attempt', async (req,res) => {
     //upgrade attribute by specified value
     differenceStat[attribute] += upgradedValue
 
-<<<<<<< HEAD
-    if (member.length === 0) {
-        //copied from andrew but shouldn't happen since the user should exist to use the upgrade button
-    } else {
-        let lastUpdated = member[0].last_updated
-        const updateMemberQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE opaque_user_id = $2 and channel_id = $3'
-        //update players table to decrease points and increase stat
-        await client.query(updateMemberQuery, [member.points_to_spend-cost, currentOpaqueUserId, channelId, member.attack_stat + differenceStat['attack'], 
-            member.jump_stat + differenceStat['jump'], member.shield_stat + differenceStat['shield'], member.focus_stat + differenceStat['focus']])
-        const updatedMember = {...member, points:member.points+1}
-   }
-=======
     let lastUpdated = player[0].last_updated
     const updatePlayerQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE opaque_user_id = $2 and channel_id = $3'
     //update players table to decrease points and increase stat
     await client.query(updatePlayerQuery, [player.points-cost, currentOpaqueUserId, channelId, player.attack_stat + differenceStat['attack'], 
         player.jump_stat + differenceStat['jump'], player.shield_stat + differenceStat['shield'], player.focus_stat + differenceStat['focus']])
-    
->>>>>>> 2f6cb6027d648866730e0422317dff4a7344ad45
-   if (success) {
-        //TODO determine return values for both of these cases
-   } else {
-       return res.status(200)
-   }
+        const updatedPlayer = {...player,
+                                points_to_spend:Number(player.points_to_spend) - cost,
+                                attack_stat: Number(player.attack_stat) + Number(differenceStat['attack']),
+                                jump_stat: Number(player.jump_stat) + Number(differenceStat['jump']),
+                                shield_stat: Number(player.shield_stat) + Number(differenceStat['shield']),
+                                focus_stat: Number(player.focus_stat) + Number(differenceStat['focus']),
+                                success: success
+                            }
+       return res.status(200).json(updatedPlayer)
+   
 })
 
 module.exports = upgradesRouter

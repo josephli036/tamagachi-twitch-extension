@@ -9,7 +9,7 @@
           :value="counter"
           color="teal lighten-3"
         >
-          {{ counter }}
+          <img src="../assets/tlBlueCry.png" class="mh50"/>
         </v-progress-circular>
       </div>
     </div>
@@ -44,3 +44,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.mh50 {
+  max-height: 50px !important;
+}
+</style>

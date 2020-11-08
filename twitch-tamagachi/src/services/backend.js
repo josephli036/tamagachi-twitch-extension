@@ -9,15 +9,15 @@ export default {
    * @typedef {any} authToken
    */
   upgrade(userId, channelId, attribute, upgradeType, authToken) {
-    const formData = new FormData();
-    formData.append('userId', userId);
-    formData.append('channelId', channelId);
-    formData.append('attribute', attribute);
-    formData.append('upgradeType', upgradeType);
     return HTTP({
       method: 'post',
       url: 'upgrades/attempt',
-      data: formData,
+      data: {
+        'userId': userId,
+        'channelId': channelId,
+        'attribute': attribute,
+        'upgradeType': upgradeType,
+      },
       headers: {
         'authorization': `Bearer ${authToken}`,
       }
@@ -25,13 +25,14 @@ export default {
   },
 
   updatePoints(userId, channelId, authToken) {
-    const formData = new FormData();
-    formData.append('userId', userId);
-    formData.append('channelId', channelId);
     return HTTP({
       method: 'post',
       url: 'players',
-      data: formData,
+      contentType: "application/json",
+      data: {
+        'userId': userId,
+        'channelId': channelId
+      },
       headers: {
         'authorization': `Bearer ${authToken}`,
       }

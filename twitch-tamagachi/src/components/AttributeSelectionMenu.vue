@@ -7,18 +7,44 @@
         </v-btn>
       </v-col>
       <v-col class="pa-0" cols="12">
-        <v-btn :class="buttonClasses" color="pink lighten-2" depressed @click="onAttributeClick('attack')">
+        <v-btn
+          :class="buttonClasses"
+          color="pink lighten-2"
+          depressed
+          @click="onAttributeClick('attack')"
+        >
           Attack
         </v-btn>
       </v-col>
       <v-col class="pa-0" cols="12">
-        <v-btn :class="buttonClasses" color="blue lighten-3" depressed @click="onAttributeClick('shield')"> Shield </v-btn>
+        <v-btn
+          :class="buttonClasses"
+          color="blue lighten-3"
+          depressed
+          @click="onAttributeClick('shield')"
+        >
+          Shield
+        </v-btn>
       </v-col>
       <v-col class="pa-0" cols="12">
-        <v-btn :class="buttonClasses" color="green lighten-3" depressed @click="onAttributeClick('jump')"> Jump </v-btn>
+        <v-btn
+          :class="buttonClasses"
+          color="green lighten-3"
+          depressed
+          @click="onAttributeClick('jump')"
+        >
+          Jump
+        </v-btn>
       </v-col>
       <v-col class="pa-0" cols="12">
-        <v-btn :class="buttonClasses" color="blue-grey darken-1" depressed @click="onAttributeClick('focus')"> Focus </v-btn>
+        <v-btn
+          :class="buttonClasses"
+          color="blue-grey darken-1"
+          depressed
+          @click="onAttributeClick('focus')"
+        >
+          Focus
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -38,7 +64,7 @@ export default {
   mounted() {},
   methods: {
     onAttributeClick(type) {
-      this.$emit('attributeClick', type);
+      this.$emit("attributeClick", type);
     },
   },
 };

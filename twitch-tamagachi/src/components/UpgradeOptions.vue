@@ -1,7 +1,10 @@
 <template>
   <v-slide-x-reverse-transition hide-on-leave>
-    <attribute-selection-menu v-if="!showUpgradeOptions" @attributeClick="onAttributeClick"/>
-    <upgrade-selection-menu v-else @upgradeClick="onUpgradeClick"/>
+    <attribute-selection-menu
+      v-if="!showUpgradeOptions"
+      @attributeClick="onAttributeClick"
+    />
+    <upgrade-selection-menu v-else @upgradeClick="onUpgradeClick" />
   </v-slide-x-reverse-transition>
 </template>
 
@@ -11,7 +14,7 @@ import UpgradeSelectionMenu from "../components/UpgradeSelectionMenu.vue";
 
 export default {
   name: "UpgradeOptions",
-  components: {AttributeSelectionMenu, UpgradeSelectionMenu},
+  components: { AttributeSelectionMenu, UpgradeSelectionMenu },
   mixins: [],
   data() {
     return {
@@ -29,7 +32,7 @@ export default {
       this.currentAttribute = type;
     },
     onUpgradeClick(type) {
-      if (type === 'back') {
+      if (type === "back") {
         this.currentAttribute = null;
       }
     },

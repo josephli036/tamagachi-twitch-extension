@@ -15,6 +15,9 @@
       <upgrade-button @upgrade="onUpgrade"/>
       <point-counter ref="pcounter"/>
       <leaderboard-button @leaderboardClick="openLeaderboard" />
+      <v-fade-transition>
+        <loading-overlay v-if="loading" />
+      </v-fade-transition>
     </v-card>
     <v-dialog
       v-model="leaderboardDialog"
@@ -35,6 +38,7 @@ import PointDisplay from "../components/PointDisplay.vue";
 import PointCounter from "../components/PointCounter.vue";
 import Leaderboard from "../components/Leaderboard.vue";
 import LeaderboardButton from "../components/LeaderboardButton.vue";
+import LoadingOverlay from "../components/LoadingOverlay.vue";
 
 export default {
   name: "Panel",
@@ -45,10 +49,12 @@ export default {
     PointCounter,
     Leaderboard,
     LeaderboardButton,
+    LoadingOverlay,
   },
   mixins: [],
   data() {
     return {
+      loading: true,
       leaderboardDialog: false,
       attack: "1",
       shield: "2",
@@ -61,7 +67,11 @@ export default {
   },
   computed: {},
   mounted() {
-    this.getPoints();
+    setTimeout(() => {
+        this.loading = false;
+        this.getPoints();
+      }, 1000
+    );
   },
   methods: {
     onUpgrade({ attribute, type }) {
@@ -74,7 +84,6 @@ export default {
         window.authToken
       ).then((data) => {
         instance.updateData(data);
-        console.log(data);
       });
     },
 
@@ -87,7 +96,6 @@ export default {
       ).then(data => {
         instance.updateData(data);
         instance.resetCounter();
-        console.log(data);
       });
     },
 

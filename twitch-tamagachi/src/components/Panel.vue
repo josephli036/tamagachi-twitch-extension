@@ -57,7 +57,7 @@ export default {
   },
   computed: {},
   mounted() {
-    this.updatePoints();
+    this.getPoints();
   },
   methods: {
     onUpgrade({ attribute, type }) {
@@ -69,36 +69,41 @@ export default {
         type,
         window.authToken
       ).then((data) => {
-        instance.attack = String(data.attack_stat);
-        instance.shield = String(data.shield_stat);
-        instance.focus = String(data.focus_stat);
-        instance.jump = String(data.jump_stat);
-        instance.points = String(data.points_to_spend);
+        instance.updateData(data);
         console.log(data);
       });
     },
 
-    updatePoints() {
+    getPoints() {
       const instance = this;
       BackendApi.updatePoints(
         window.Twitch.ext.viewer.id,
         window.channelId,
         window.authToken
       ).then(data => {
-        instance.attack = String(data.attack_stat);
-        instance.shield = String(data.shield_stat);
-        instance.focus = String(data.focus_stat);
-        instance.jump = String(data.jump_stat);
-        instance.points = String(data.points_to_spend);
-        instance.counter = "0";
+        instance.updateData(data);
+        instance.resetCounter();
         console.log(data);
       });
+    },
+
+    updateData(data) {
+      const instance = this;
+      instance.attack = String(data.attack_stat);
+      instance.shield = String(data.shield_stat);
+      instance.focus = String(data.focus_stat);
+      instance.jump = String(data.jump_stat);
+      instance.points = String(data.points_to_spend);
+    },
+
+    resetCounter() {
+      this.counter = "0";
     },
   },
   created() {
     const instance = this;
     setInterval(() => {
-      instance.updatePoints();
+      instance.getPoints();
     }, 30000);
   },
 };

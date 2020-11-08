@@ -11,15 +11,42 @@
           <v-icon>{{ icon }}</v-icon>
         </v-btn>
       </template>
-      <v-btn :color="color" dark fab small depressed @click="$emit('upgrade', 5)">
-        <v-icon>mdi-numeric-5</v-icon>
-      </v-btn>
-      <v-btn :color="color" dark fab small depressed @click="$emit('upgrade', 5)">
-        <v-icon>mdi-numeric-3</v-icon>
-      </v-btn>
-      <v-btn :color="color" dark fab small depressed @click="$emit('upgrade', 5)">
-        <v-icon>mdi-numeric-1</v-icon>
-      </v-btn>
+
+      <v-tooltip top :color="color">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn :color="color" dark fab small depressed v-bind="attrs" v-on="on" @click.stop="$emit('upgrade', 5)">
+            <v-icon>mdi-numeric-5</v-icon>
+          </v-btn>
+        </template>
+        <div class="d-flex" style="flex-direction: column">
+          Chance: 10% <br/>
+          Cost: 200
+        </div>
+      </v-tooltip>
+
+      <v-tooltip top :color="color">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn :color="color" dark fab small depressed v-bind="attrs" v-on="on" @click.stop="$emit('upgrade', 3)">
+            <v-icon>mdi-numeric-3</v-icon>
+          </v-btn>
+        </template>
+        <div class="d-flex" style="flex-direction: column">
+          Chance: 60% <br/>
+          Cost: 125
+        </div>
+      </v-tooltip>
+
+      <v-tooltip top :color="color">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn :color="color" dark fab small depressed v-bind="attrs" v-on="on" @click.stop="$emit('upgrade', 1)">
+            <v-icon>mdi-numeric-1</v-icon>
+          </v-btn>
+        </template>
+        <div class="d-flex" style="flex-direction: column">
+          Chance: 95% <br/>
+          Cost: 75
+        </div>
+      </v-tooltip>
     </v-speed-dial>
   </v-fab-transition>
 </template>

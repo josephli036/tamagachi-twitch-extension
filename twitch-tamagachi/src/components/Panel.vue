@@ -5,7 +5,7 @@
         <v-spacer></v-spacer>
         <div class="d-flex">
           <v-spacer></v-spacer>
-          <div class="pa-0"><upgrade /></div>
+          <div class="pa-0"><upgrade-button /></div>
         </div>
       </div>
     </v-overlay>

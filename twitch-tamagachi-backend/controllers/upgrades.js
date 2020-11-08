@@ -52,24 +52,36 @@ upgradesRouter.post('/attempt', async (req,res) => {
     let singlePlayer = player[0]
     const updatePlayerQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE user_id = $2 and channel_id = $3'
     //update players table to decrease points and increase stat
-    await client.query(updatePlayerQuery, 
-        [Number(singlePlayer.points_to_spend) - Number(cost), 
-        currentUserId, 
-        channelId, 
-        Number(singlePlayer.attack_stat) + Number(differenceStat['attack']), 
-        Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
-        Number(singlePlayer.shield_stat) + Number(differenceStat['shield']), 
-        Number(singlePlayer.focus_stat) + Number(differenceStat['focus'])]
-    );
-        const updatedPlayer = {...player,
-                                points_to_spend:Number(singlePlayer.points_to_spend) - Number(cost),
-                                attack_stat: Number(singlePlayer.attack_stat) + Number(differenceStat['attack']),
-                                jump_stat: Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
-                                shield_stat: Number(singlePlayer.shield_stat) + Number(differenceStat['shield']),
-                                focus_stat: Number(singlePlayer.focus_stat) + Number(differenceStat['focus']),
-                                success: success
-                            }
+    if (singlePlayer.points_to_spend >= upgradedValue) {
+        await client.query(updatePlayerQuery, 
+            [Number(singlePlayer.points_to_spend) - Number(cost), 
+            currentUserId, 
+            channelId, 
+            Number(singlePlayer.attack_stat) + Number(differenceStat['attack']), 
+            Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
+            Number(singlePlayer.shield_stat) + Number(differenceStat['shield']), 
+            Number(singlePlayer.focus_stat) + Number(differenceStat['focus'])]
+        );
+            const updatedPlayer = {...player,
+                                    points_to_spend:Number(singlePlayer.points_to_spend) - Number(cost),
+                                    attack_stat: Number(singlePlayer.attack_stat) + Number(differenceStat['attack']),
+                                    jump_stat: Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
+                                    shield_stat: Number(singlePlayer.shield_stat) + Number(differenceStat['shield']),
+                                    focus_stat: Number(singlePlayer.focus_stat) + Number(differenceStat['focus']),
+                                    success: success
+                                }
        return res.status(200).json(updatedPlayer)
+    } else {
+        const updatedPlayer = {...player,
+            points_to_spend:Number(singlePlayer.points_to_spend),
+            attack_stat: Number(singlePlayer.attack_stat) + Number(differenceStat['attack']),
+            jump_stat: Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
+            shield_stat: Number(singlePlayer.shield_stat) + Number(differenceStat['shield']),
+            focus_stat: Number(singlePlayer.focus_stat) + Number(differenceStat['focus']),
+            success: success
+        }
+        return res.status(200).json(updatedPlayer)
+    }
    
 })
 

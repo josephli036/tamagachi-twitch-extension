@@ -1,7 +1,7 @@
 {
   "allowHttpBackend": false,
-  "backendCommand": "",
-  "backendFolderName": "",
+  "backendCommand": "node index.js",
+  "backendFolderName": "twitch-tamagachi-backend",
   "certificateExceptions": [],
   "extensionViews": [
     {
@@ -19,7 +19,7 @@
       },
       "id": "1",
       "isPopout": false,
-      "label": "mn",
+      "label": "panel",
       "linked": false,
       "linkedUserId": "",
       "orientation": "Portrait",

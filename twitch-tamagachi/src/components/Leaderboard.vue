@@ -18,15 +18,20 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-app-bar>
+      <v-progress-linear
+        v-if="loading"
+        indeterminate
+        color="cyan"
+      ></v-progress-linear>
       <v-expansion-panels v-model="panelModel" accordion flat hover multiple tile class="mb-6">
         <v-expansion-panel
           v-for="(item,i) in playerData"
           :key="i"
         >
           <v-expansion-panel-header :style="panelModel.includes(i) ? activeStyle : ''" disable-icon-rotate>
-            {{ item.username }}
+            {{ item.user_id }}
             <template v-slot:actions>
-              {{ item.ranking }}
+              {{ item.player_rank }}
             </template>
           </v-expansion-panel-header>
           <v-expansion-panel-content class="pb-0">
@@ -44,7 +49,7 @@
                 </v-col>
                 <v-col class="py-1" cols=4>
                   <span class="stat-numbers">
-                    {{ item.attack }}
+                    {{ item.attack_stat }}
                   </span>
                 </v-col>
                 <v-col class="pa-0" cols=2>
@@ -61,7 +66,7 @@
                 </v-col>
                 <v-col class="py-1" cols=4>
                   <span class="stat-numbers">
-                    {{ item.shield }}
+                    {{ item.shield_stat }}
                   </span>
                 </v-col>
               </v-row>
@@ -80,7 +85,7 @@
                 </v-col>
                 <v-col class="py-1" cols=4>
                   <span class="stat-numbers">
-                    {{ item.focus }}
+                    {{ item.focus_stat }}
                   </span>
                 </v-col>
                 <v-col class="pa-0" cols=2>
@@ -97,7 +102,7 @@
                 </v-col>
                 <v-col class="py-1" cols=4>
                   <span class="stat-numbers">
-                    {{ item.jump }}
+                    {{ item.jump_stat }}
                   </span>
                 </v-col>
               </v-row>
@@ -110,48 +115,50 @@
 </template>
 
 <script>
+  import BackendApi from "../services/backend.js";
 
   export default {
     name: "Leaderboard",
     data: () => ({
       activeStyle: "fontSize: 20px;",
       panelModel: [],
+      loading: true,
       playerData: [
         {
-          username: 'Joseph',
-          attack: 6,
-          shield: 136,
-          jump: 52,
-          focus: 43,
-          totalPoints: 9751345,
-          ranking: 1,
+          user_id: 'Joseph',
+          attack_stat: 6,
+          shield_stat: 136,
+          jump_stat: 52,
+          focus_stat: 43,
+          total_points: 9751345,
+          player_rank: 1,
         },
         {
-          username: 'Ricky',
-          attack: 536,
-          shield: 1346,
-          jump: 552,
-          focus: 432343,
-          totalPoints: 34135245,
-          ranking: 2,
+          user_id: 'Ricky',
+          attack_stat: 536,
+          shield_stat: 1346,
+          jump_stat: 552,
+          focus_stat: 432343,
+          total_points: 34135245,
+          player_rank: 2,
         },
         {
-          username: 'Trent',
-          attack: 26,
-          shield: 14326,
-          jump: 572,
-          focus: 4773,
-          totalPoints: 9133445,
-          ranking: 3,
+          user_id: 'Trent',
+          attack_stat: 26,
+          shield_stat: 14326,
+          jump_stat: 572,
+          focus_stat: 4773,
+          total_points: 9133445,
+          player_rank: 3,
         },
         {
-          username: 'Andrew',
-          attack: 716,
-          shield: 146,
-          jump: 562,
-          focus: 4893,
-          totalPoints: 1334545,
-          ranking: 4,
+          user_id: 'Andrew',
+          attack_stat: 716,
+          shield_stat: 146,
+          jump_stat: 562,
+          focus_stat: 4893,
+          total_points: 1334545,
+          player_rank: 4,
         },
       ]
     }),
@@ -165,7 +172,15 @@
     },
     methods: {
       getData() {
-        return;
+        this.loading = true;
+        BackendApi.getLeaderboard(
+          window.Twitch.ext.viewer.id,
+          window.channelId,
+          window.authToken
+        ).then(data => {
+          this.playerData = data;
+          this.loading = false;
+        })
       },
     },
   }

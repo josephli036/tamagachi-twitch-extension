@@ -1,54 +1,46 @@
 <template>
-  <v-overlay absolute opacity="0">
+  <v-overlay absolute opacity="0" z-index="0">
     <div class="d-flex fill-height" style="flex-direction:column">
       <div class="d-flex fill-height align-center justify-center">
         <v-progress-circular
-            :rotate="-90"
-            :size="100"
-            :width="15"
-            :value="value"
-            color="primary"
-          >
-            {{ value }}
-          </v-progress-circular>
+          :rotate="-90"
+          :size="100"
+          :width="15"
+          :value="counter"
+          color="primary"
+        >
+          {{ counter }}
+        </v-progress-circular>
       </div>
     </div>
   </v-overlay>
 </template>
 
 <script>
+export default {
+  props: {},
+  data: () => ({
+    counter: 0
+  }),
 
-  export default {
-    props: {
-      value: {
-        type: String,
-        required: true,
-      },
-    },
-    data: () => ({
-    }),
+  components: {},
 
-    components: {
-    },
+  computed: {},
 
-    computed: {
-    },
+  watch: {},
 
-    watch: {
-    },
+  methods: {
+    tick() {
+      this.counter += 1;
+      this.counter = this.counter > 100 ? 0 : this.counter;
+    }
+  },
 
-    methods: {
-      tick() {
-        this.value += 1;
-        this.value = this.value > 100 ? 0 : this.value;
-      },
-    },
-
-    created() {
-      const instance = this;
-      setInterval(() => {
-        instance.tick();
-      }, 300);
-    },
+  created() {
+    const instance = this;
+    setInterval(() => {
+      instance.tick();
+    }, 300);
   }
+};
 </script>

@@ -11,20 +11,8 @@
         :jump="jump"
       />
     </v-row>
-    <v-overlay absolute opacity="0">
-      <div class="d-flex fill-height" style="flex-direction: column">
-        <v-spacer></v-spacer>
-        <div class="d-flex">
-          <v-spacer></v-spacer>
-          <div class="pa-0">
-            <upgrade-button
-              @upgrade="onUpgrade"
-            />
-          </div>
-        </div>
-      </div>
-    </v-overlay>
-    <point-counter :value="counter"/>
+    <upgrade-button @upgrade="onUpgrade"/>
+    <point-counter ref="pcounter"/>
   </v-card>
 </template>
 
@@ -97,7 +85,7 @@ export default {
     },
 
     resetCounter() {
-      this.counter = "0";
+      this.$refs.pcounter.counter = "0";
     },
   },
   created() {

@@ -1,7 +1,7 @@
 {
   "allowHttpBackend": false,
-  "backendCommand": "",
-  "backendFolderName": "",
+  "backendCommand": "node index.js",
+  "backendFolderName": "twitch-tamagachi-backend",
   "certificateExceptions": [],
   "extensionViews": [
     {
@@ -19,7 +19,7 @@
       },
       "id": "1",
       "isPopout": false,
-      "label": "mn",
+      "label": "panel",
       "linked": false,
       "linkedUserId": "",
       "orientation": "Portrait",
@@ -44,7 +44,7 @@
     "installationCount": -42,
     "liveConfigUrl": "",
     "name": "tamagachi-tt",
-    "panelHeight": 300,
+    "panelHeight": 500,
     "privacyPolicyUrl": "",
     "requestIdentityLink": false,
     "requiredBroadcasterAbilities": [],
@@ -64,7 +64,7 @@
     "views": {
       "panel": {
         "viewerUrl": "http://localhost:8080/panel",
-        "height": 300,
+        "height": 500,
         "canLinkExternalContent": false
       },
       "config": {

@@ -8,7 +8,7 @@
           depressed
           @click="onUpgradeClick('5')"
         >
-          +5 10% Xpts
+          +5 10% 200pts
         </v-btn>
       </v-col>
       <v-col class="pa-0" cols="12">
@@ -18,7 +18,7 @@
           depressed
           @click="onUpgradeClick('3')"
         >
-          +3 60% Xpts
+          +3 60% 125pts
         </v-btn>
       </v-col>
       <v-col class="pa-0" cols="12">
@@ -28,7 +28,7 @@
           depressed
           @click="onUpgradeClick('1')"
         >
-          +1 95% Xpts
+          +1 95% 75pts
         </v-btn>
       </v-col>
       <v-col class="pa-0" cols="12">

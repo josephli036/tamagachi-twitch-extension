@@ -4,6 +4,7 @@
       direction="left"
       transition="slide-x-reverse-transition"
       style="padding-bottom: 4px"
+      open-on-hover="true"
     >
       <template v-slot:activator>
         <v-btn
@@ -23,7 +24,7 @@
         small
         depressed
       >
-        <v-icon>mdi-numeric-5</v-icon>
+        +5
       </v-btn>
       <v-btn
         :color="color"
@@ -32,7 +33,7 @@
         small
         depressed
       >
-        <v-icon>mdi-numeric-3</v-icon>
+        +3
       </v-btn>
       <v-btn
         :color="color"
@@ -41,7 +42,7 @@
         small
         depressed
       >
-        <v-icon>mdi-numeric-1</v-icon>
+        +1
       </v-btn>
     </v-speed-dial>
   </v-fab-transition>

@@ -39,7 +39,7 @@ const authHandler = async (req, res, next) => {
             if (req.body.userId && req.body.userId !== decodedToken.user_id) {
                 throw 'invalid userid'
             } else {
-                res.locals.token = token
+                res.locals.token = decodedToken
                 console.log('Authorized')
                 next()
             }

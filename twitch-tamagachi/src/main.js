@@ -6,8 +6,9 @@ import router from "./router";
 Vue.config.productionTip = false;
 
 window.Twitch.ext.onAuthorized(function(auth) {
-  console.log('The JWT that will be passed to the EBS is', auth.token);
-  console.log('The channel ID is', auth.channelId);
+  window.authToken = auth.token;
+  window.channelId = auth.channelId;
+  console.log(window.authToken);
 });
 
 new Vue({

@@ -16,10 +16,10 @@ export default {
     formData.append('upgradeType', upgradeType);
     return HTTP({
       method: 'post',
-      url: 'upgrade/attempt',
+      url: 'upgrades/attempt',
       data: formData,
       headers: {
-        'x-extension-jwt': authToken,
+        'authorization': `Bearer ${authToken}`,
       }
     }).then(response => response.data);
   },

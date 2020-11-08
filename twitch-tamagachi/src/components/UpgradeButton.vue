@@ -5,24 +5,28 @@
         color="amber lighten-2"
         icon="mdi-run-fast"
         v-show="open"
+        @upgrade="$emit('upgrade', { attribute: 'shield', type: arguments[0] })"
       />
 
       <attribute-button
         color="light-green lighten-2"
         icon="mdi-brain"
         v-show="open"
+        @upgrade="$emit('upgrade', { attribute: 'shield', type: arguments[0] })"
       />
 
       <attribute-button
         color="light-blue lighten-2"
         icon="mdi-shield"
         v-show="open"
+        @upgrade="$emit('upgrade', { attribute: 'shield', type: arguments[0] })"
       />
 
       <attribute-button
         color="deep-orange lighten-1"
         icon="mdi-sword-cross"
         v-show="open"
+        @upgrade="$emit('upgrade', { attribute: 'shield', type: arguments[0] })"
       />
       <v-tooltip
         min-width="84px"

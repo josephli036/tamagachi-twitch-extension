@@ -11,13 +11,13 @@
           <v-icon>{{ icon }}</v-icon>
         </v-btn>
       </template>
-      <v-btn :color="color" dark fab small depressed>
+      <v-btn :color="color" dark fab small depressed @click="$emit('upgrade', 5)">
         <v-icon>mdi-numeric-5</v-icon>
       </v-btn>
-      <v-btn :color="color" dark fab small depressed>
+      <v-btn :color="color" dark fab small depressed @click="$emit('upgrade', 5)">
         <v-icon>mdi-numeric-3</v-icon>
       </v-btn>
-      <v-btn :color="color" dark fab small depressed>
+      <v-btn :color="color" dark fab small depressed @click="$emit('upgrade', 5)">
         <v-icon>mdi-numeric-1</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -38,12 +38,11 @@ export default {
     },
   },
 
-  data: () => ({
-    transition: "slide-y-reverse-transition",
-  }),
+  data: () => ({}),
 
   computed: {},
 
-  watch: {},
+  methods: {
+  },
 };
 </script>

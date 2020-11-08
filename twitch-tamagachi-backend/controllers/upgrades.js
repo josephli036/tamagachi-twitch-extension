@@ -29,7 +29,6 @@ upgradesRouter.post('/attempt', async (req,res) => {
         success = true
     }
 
-
     const currentOpaqueUserId = res.locals.token.opaque_user_id
     const currentUserId = res.locals.token.user_id
     const channelId = res.locals.token.channel_id
@@ -37,10 +36,10 @@ upgradesRouter.post('/attempt', async (req,res) => {
     let member = (await client.query(memberQuery, [currentOpaqueUserId])).rows
     //dictionary representing delta for stats
     let differenceStat = {
-        attack: 0,
-        jump: 0,
-        shield: 0,
-        focus: 0, 
+        'attack': 0,
+        'jump': 0,
+        'shield': 0,
+        'focus': 0, 
     }
     //upgrade attribute by specified value
     differenceStat[attribute] += upgradedValue
@@ -49,9 +48,9 @@ upgradesRouter.post('/attempt', async (req,res) => {
         //copied from andrew but shouldn't happen since the user should exist to use the upgrade button
     } else {
         let lastUpdated = member[0].last_updated
-        const updateMemberQuery = 'UPDATE players SET points = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE opaque_user_id = $2 and channel_id = $3'
+        const updateMemberQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE opaque_user_id = $2 and channel_id = $3'
         //update players table to decrease points and increase stat
-        await client.query(updateMemberQuery, [member.points-cost, currentOpaqueUserId, channelId, member.attack_stat + differenceStat['attack'], 
+        await client.query(updateMemberQuery, [member.points_to_spend-cost, currentOpaqueUserId, channelId, member.attack_stat + differenceStat['attack'], 
             member.jump_stat + differenceStat['jump'], member.shield_stat + differenceStat['shield'], member.focus_stat + differenceStat['focus']])
         const updatedMember = {...member, points:member.points+1}
    }

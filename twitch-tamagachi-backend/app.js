@@ -5,8 +5,10 @@ const playersRouter = require('./controllers/players')
 const upgradesRouter = require('./controllers/upgrades')
 const middleware = require('./utils/middleware')
 const { authHandler } = require('./utils/middleware')
+const cors = require('cors')
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 
 app.use('/api/hiscores', authHandler, hiscoresRouter)

@@ -14,7 +14,7 @@
       </v-row>
       <upgrade-button @upgrade="onUpgrade"/>
       <point-counter ref="pcounter"/>
-      <leaderboard-button @leaderboardClick="leaderboardDialog=true" />
+      <leaderboard-button @leaderboardClick="openLeaderboard" />
     </v-card>
     <v-dialog
       v-model="leaderboardDialog"
@@ -22,7 +22,7 @@
       hide-overlay
       transition="dialog-bottom-transition"
     >
-      <leaderboard @leaderboardClose="leaderboardDialog=false" />
+      <leaderboard ref="leaderboard" @leaderboardClose="leaderboardDialog=false" />
     </v-dialog>
   </v-container>
 </template>
@@ -102,6 +102,13 @@ export default {
 
     resetCounter() {
       this.$refs.pcounter.counter = "0";
+    },
+
+    openLeaderboard() {
+      this.leaderboardDialog = true;
+      if ('leaderboard' in this.$refs){
+        this.$refs.leaderboard.getData();
+      }
     },
   },
   created() {

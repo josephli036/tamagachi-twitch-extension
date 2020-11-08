@@ -44,8 +44,12 @@ export default {
   }
 };
 </script>
+
 <style scoped>
 .mh50 {
   max-height: 50px !important;
+}
+>>> .v-progress-circular__underlay {
+  stroke: #f7f7f7;
 }
 </style>

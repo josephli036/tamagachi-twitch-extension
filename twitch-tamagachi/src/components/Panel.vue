@@ -1,6 +1,6 @@
 <template>
   <v-container pa-0>
-    <v-card class="pa-0" height="500" width="320">
+    <v-card class="pa-0" height="500" width="320" color="#f7f7f7">
       <v-row no-gutters>
         <point-display :points="points"/>
       </v-row>
@@ -68,9 +68,12 @@ export default {
   computed: {},
   mounted() {
     setTimeout(() => {
-        this.loading = false;
         this.getPoints();
       }, 1000
+    );
+    setTimeout(() => {
+        this.loading = false;
+      }, 2000
     );
   },
   methods: {

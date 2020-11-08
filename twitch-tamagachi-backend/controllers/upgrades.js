@@ -28,11 +28,13 @@ upgradesRouter.post('/attempt', async (req,res) => {
         success = true
     }
 
-    const currentOpaqueUserId = res.locals.token.opaque_user_id
+    console.log(res.locals.token)
+
     const currentUserId = res.locals.token.user_id
     const channelId = res.locals.token.channel_id
-    const playerQuery = 'SELECT * FROM players WHERE opaque_user_id = $1'
-    let player = (await client.query(playerQuery, [currentOpaqueUserId])).rows
+    // TODO(): Fix user not existing.
+    const playerQuery = 'SELECT * FROM players WHERE user_id = $1 and channel_id = $2'
+    let player = (await client.query(playerQuery, [currentUserId, channelId])).rows
     //dictionary representing delta for stats
     let differenceStat = {
         'attack': 0,
@@ -42,13 +44,12 @@ upgradesRouter.post('/attempt', async (req,res) => {
     }
     //upgrade attribute by specified value
     differenceStat[attribute] += upgradedValue
-    let lastUpdated = player[0].last_updated
     let singlePlayer = player[0]
-    const updatePlayerQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE opaque_user_id = $2 and channel_id = $3'
+    const updatePlayerQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE user_id = $2 and channel_id = $3'
     //update players table to decrease points and increase stat
     await client.query(updatePlayerQuery, 
         [Number(singlePlayer.points_to_spend) - Number(cost), 
-        currentOpaqueUserId, 
+        currentUserId, 
         channelId, 
         Number(singlePlayer.attack_stat) + Number(differenceStat['attack']), 
         Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),

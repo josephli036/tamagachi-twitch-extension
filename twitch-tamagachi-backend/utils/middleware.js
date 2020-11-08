@@ -29,27 +29,20 @@ const authHandler = async (req, res, next) => {
         next()
     } else {
         try {
-            console.log("fook1")
-            console.log(req.headers.authorization)
             const token = req.headers.authorization.split('Bearer ')[1]
-            console.log("split token")
-            console.log(token)
+            
             
             const secret = new Buffer(config.SECRET, 'base64');
             const decodedToken = await jwt.verify(token, secret)
-            console.log("verified")
 
-            console.log(decodedToken)
-
-            console.log("fook2")
             if (req.body.userId && req.body.userId !== decodedToken.user_id) {
                 throw 'invalid userid'
             } else {
+                res.locals.token = token
                 console.log('Authorized')
                 next()
             }
         } catch {
-            console.log("fookerror")
             return res.status(401).json({error: new Error('invalid request')})
         }
     }

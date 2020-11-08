@@ -7,7 +7,7 @@ upgradesRouter.get('/', async (req,res) => {
      * TODO when we want dynamic upgrades that change
      * Get the available upgrades for the session, attribute, increment value, 
     */
-    return res.status(200).json('penis').end()
+    return res.status(200).json().end()
 })
 
 upgradesRouter.post('/attempt', async (req,res) => {

@@ -1,6 +1,6 @@
 {
   "allowHttpBackend": false,
-  "backendCommand": "npm run start",
+  "backendCommand": "node index.js",
   "backendFolderName": "twitch-tamagachi-backend",
   "certificateExceptions": [],
   "extensionViews": [
@@ -57,13 +57,13 @@
     "vendorCode": "",
     "version": "0.0.1",
     "viewerSummary": "",
-    "viewerUrl": "http://localhost:8080/panel.html",
+    "viewerUrl": "http://localhost:8080/panel",
     "viewerUrls": {
-      "panel": "http://localhost:8080/panel.html"
+      "panel": "http://localhost:8080/panel"
     },
     "views": {
       "panel": {
-        "viewerUrl": "http://localhost:8080/panel.html",
+        "viewerUrl": "http://localhost:8080/panel",
         "height": 300,
         "canLinkExternalContent": false
       },

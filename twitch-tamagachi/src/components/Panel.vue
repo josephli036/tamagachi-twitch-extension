@@ -31,6 +31,15 @@ export default {
         console.log(data);
       });
     },
+
+    updatePoints() {
+      setInterval(() => {
+        BackendApi.updatePoints(window.Twitch.ext.viewer.idd, window.channelId, window.authToken)
+      }, 10000)
+    }
   },
+  created () {
+    this.updatePoints()
+  }
 };
 </script>

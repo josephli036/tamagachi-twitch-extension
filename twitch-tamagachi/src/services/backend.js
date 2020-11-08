@@ -23,4 +23,18 @@ export default {
       }
     }).then(response => response.data);
   },
+
+  updatePoints(userId, channelId, authToken) {
+    const formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('channelId', channelId);
+    return HTTP({
+      method: 'post',
+      url: 'players',
+      data: formData,
+      headers: {
+        'authorization': `Bearer ${authToken}`,
+      }
+    }).then(response => response.data);
+  }
 };

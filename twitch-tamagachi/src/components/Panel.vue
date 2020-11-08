@@ -1,31 +1,36 @@
 <template>
   <v-card class="pa-0" height="500" width="300">
-    <v-overlay
-      absolute
-      opacity=0
-    >
-      <div class="d-flex fill-height" style="flex-direction:column">
-        <v-spacer></v-spacer>
-        <div class="d-flex">
+    <v-container>
+      <v-row>
+        <!-- put stat banner here -->
+      </v-row>
+      <v-overlay
+        absolute
+        opacity=0
+      >
+        <div class="d-flex fill-height" style="flex-direction:column">
           <v-spacer></v-spacer>
-          <div class="pa-0"><upgrade /></div>
+          <div class="d-flex">
+            <v-spacer></v-spacer>
+            <div class="pa-0"><upgrade-button /></div>
+          </div>
         </div>
-      </div>
 
-    </v-overlay>
+      </v-overlay>
+    </v-container>
   </v-card>
 </template>
 
 <script>
 import BackendApi from "../services/backend.js";
-// import UpgradeOptions from "../components/UpgradeOptions.vue";
-// import UpgradeButton from "../components/UpgradeButton.vue";
-import Upgrade from "../components/Upgrade.vue"
+// import StatBanner from "../components/StatBanner.vue";
+import UpgradeButton from "../components/UpgradeButton.vue";
 
 export default {
   name: "Panel",
   components: {
-    Upgrade,
+    UpgradeButton,
+    // StatBanner,
   },
   mixins: [],
   data() {

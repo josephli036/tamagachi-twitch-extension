@@ -1,19 +1,30 @@
 <template>
-  <v-card class="pa-0" height="500" width="300">
-    <v-row no-gutters>
-      <point-display :points="points"/>
-    </v-row>
-    <v-row no-gutters>
-      <stat-banner
-        :attack="attack"
-        :shield="shield"
-        :focus="focus"
-        :jump="jump"
-      />
-    </v-row>
-    <upgrade-button @upgrade="onUpgrade"/>
-    <point-counter ref="pcounter"/>
-  </v-card>
+  <v-container pa-0>
+    <v-card class="pa-0" height="500" width="320">
+      <v-row no-gutters>
+        <point-display :points="points"/>
+      </v-row>
+      <v-row no-gutters>
+        <stat-banner
+          :attack="attack"
+          :shield="shield"
+          :focus="focus"
+          :jump="jump"
+        />
+      </v-row>
+      <upgrade-button @upgrade="onUpgrade"/>
+      <point-counter ref="pcounter"/>
+      <leaderboard-button @leaderboardClick="leaderboardDialog=true" />
+    </v-card>
+    <v-dialog
+      v-model="leaderboardDialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <leaderboard @leaderboardClose="leaderboardDialog=false" />
+    </v-dialog>
+  </v-container>
 </template>
 
 <script>
@@ -22,6 +33,8 @@ import StatBanner from "../components/StatBanner.vue";
 import UpgradeButton from "../components/UpgradeButton.vue";
 import PointDisplay from "../components/PointDisplay.vue";
 import PointCounter from "../components/PointCounter.vue";
+import Leaderboard from "../components/Leaderboard.vue";
+import LeaderboardButton from "../components/LeaderboardButton.vue";
 
 export default {
   name: "Panel",
@@ -30,10 +43,13 @@ export default {
     StatBanner,
     PointDisplay,
     PointCounter,
+    Leaderboard,
+    LeaderboardButton,
   },
   mixins: [],
   data() {
     return {
+      leaderboardDialog: false,
       attack: "1",
       shield: "2",
       focus: "3",

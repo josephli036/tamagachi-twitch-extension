@@ -1,5 +1,6 @@
 const config = require('./utils/config')
 const express = require('express')
+require('express-async-errors')
 const hiscoresRouter = require('./controllers/hiscores')
 const playersRouter = require('./controllers/players')
 const upgradesRouter = require('./controllers/upgrades')

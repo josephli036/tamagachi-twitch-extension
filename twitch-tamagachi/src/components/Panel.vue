@@ -1,23 +1,14 @@
 <template>
   <v-card class="pa-0" height="500" width="300">
-    <v-container>
-      <v-row>
-        <!-- put stat banner here -->
-      </v-row>
-      <v-overlay
-        absolute
-        opacity=0
-      >
-        <div class="d-flex fill-height" style="flex-direction:column">
+    <v-overlay absolute opacity="0">
+      <div class="d-flex fill-height" style="flex-direction: column">
+        <v-spacer></v-spacer>
+        <div class="d-flex">
           <v-spacer></v-spacer>
-          <div class="d-flex">
-            <v-spacer></v-spacer>
-            <div class="pa-0"><upgrade-button /></div>
-          </div>
+          <div class="pa-0"><upgrade /></div>
         </div>
-
-      </v-overlay>
-    </v-container>
+      </div>
+    </v-overlay>
   </v-card>
 </template>
 
@@ -39,11 +30,30 @@ export default {
   computed: {},
   mounted() {},
   methods: {
-    onUpgrade({attribute, type}) {
-      BackendApi.upgrade(window.Twitch.ext.viewer.idd, window.channelId, attribute, type, window.authToken).then(data => {
+    onUpgrade({ attribute, type }) {
+      BackendApi.upgrade(
+        window.Twitch.ext.viewer.id,
+        window.channelId,
+        attribute,
+        type,
+        window.authToken
+      ).then((data) => {
         console.log(data);
       });
     },
+
+    updatePoints() {
+      setInterval(() => {
+        BackendApi.updatePoints(
+          window.Twitch.ext.viewer.id,
+          window.channelId,
+          window.authToken
+        );
+      }, 30000);
+    },
+  },
+  created() {
+    this.updatePoints();
   },
 };
 </script>

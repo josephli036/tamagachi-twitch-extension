@@ -6,17 +6,15 @@ playersRouter.post('/', async (req,res) => {
      * Updates the points of the player, IF an appropriate amount of time has passed
      * @return {channel_id, opaque_user_id, last_updated, total_points, points_to_spend, attack_stat, jump_stat, shield_stat, focus_stat}
     */ 
-
     const currentOpaqueUserId = res.locals.token.opaque_user_id
     const currentUserId = res.locals.token.user_id
     const channelId = res.locals.token.channel_id
     const playerQuery = 'SELECT * FROM players WHERE user_id = $1 and channel_id = $2'
     let player = (await client.query(playerQuery, [currentUserId, channelId])).rows
-    
     if (player.length === 0) {
         const currentTime = new Date()
         const newPlayer = {channel_id: channelId, user_id: currentUserId, opaque_user_id: currentOpaqueUserId, last_updated: currentTime, total_points: 1, points_to_spend:1, attack_stat:0, jump_stat:0, shield_stat:0, focus_stat:0}
-        const insertFirstScoreQuery = 'INSERT INTO players WHERE (channel_id, user_id, opaque_user_id, last_updated, total_points, points_to_spend, attack_stat, jump_stat, shield_stat, focus_stat) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);'
+        const insertFirstScoreQuery = 'INSERT INTO players (channel_id, user_id, opaque_user_id, last_updated, total_points, points_to_spend, attack_stat, jump_stat, shield_stat, focus_stat) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);'
         await client.query(insertFirstScoreQuery, [channelId, currentUserId, currentOpaqueUserId, currentTime, 1, 1, 0, 0, 0, 0])
 
         return res.status(200).json(newPlayer)

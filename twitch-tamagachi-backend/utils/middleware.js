@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../utils/config')
 
 const unknownEndpoint = (req, res) => {
+    console.log("Unkown endpoint:", req)
     res.status(404).send({error : 'unknown endpoint'})
 }
 
@@ -29,15 +30,21 @@ const authHandler = async (req, res, next) => {
         next()
     } else {
         try {
-            const token = req.headers.authorization.split(' ')[1]
-            const decodedToken = jwt.verify(token, config.SECRET)
-            if (req.body.userId && req.body.userId !== decodedToken.userId) {
+            const token = req.headers.authorization.split('Bearer ')[1]
+            
+            
+            const secret = new Buffer(config.SECRET, 'base64');
+            const decodedToken = await jwt.verify(token, secret)
+
+            if (req.body.userId && req.body.userId !== decodedToken.user_id) {
                 throw 'invalid userid'
             } else {
+                res.locals.token = decodedToken
                 console.log('Authorized')
                 next()
             }
-        } catch {
+        } catch (e) {
+            console.log("error: ", e.message)
             return res.status(401).json({error: new Error('invalid request')})
         }
     }

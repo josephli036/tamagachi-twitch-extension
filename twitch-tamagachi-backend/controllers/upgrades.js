@@ -7,8 +7,7 @@ upgradesRouter.get('/', async (req,res) => {
      * TODO when we want dynamic upgrades that change
      * Get the available upgrades for the session, attribute, increment value, 
     */
-
-    res.status(200).json(hiscoreMembers).end()
+    return res.status(200).json('penis').end()
 })
 
 upgradesRouter.post('/attempt', async (req,res) => {
@@ -21,20 +20,26 @@ upgradesRouter.post('/attempt', async (req,res) => {
     //upgrade related variables
     let upgradedValue = 0
     let success = false
-    const cost = req.body.cost
+    const typeDefinition = {
+        5: [5, .1, 200],
+        3: [3, .6, 125],
+        1: [1, .95, 75]
+    }
+    const cost = typeDefinition[req.body.upgradeType][2]
     const attribute = req.body.attribute
-
-    if (seed <= req.body.chance) {
+    if (seed <= typeDefinition[req.body.upgradeType][1]) {
         //Successfully upgraded increment effected attribute
-        upgradedValue += req.body.increment
+        upgradedValue += typeDefinition[req.body.upgradeType][0]
         success = true
     }
 
-    const currentOpaqueUserId = res.locals.token.opaque_user_id
+    console.log(res.locals.token)
+
     const currentUserId = res.locals.token.user_id
     const channelId = res.locals.token.channel_id
-    const playerQuery = 'SELECT * FROM players WHERE opaque_user_id = $1'
-    const player = (await client.query(playerQuery, [currentOpaqueUserId])).rows
+    // TODO(): Fix user not existing.
+    const playerQuery = 'SELECT * FROM players WHERE user_id = $1 and channel_id = $2'
+    let player = (await client.query(playerQuery, [currentUserId, channelId])).rows
     //dictionary representing delta for stats
     let differenceStat = {
         'attack': 0,
@@ -44,21 +49,39 @@ upgradesRouter.post('/attempt', async (req,res) => {
     }
     //upgrade attribute by specified value
     differenceStat[attribute] += upgradedValue
-
-    let lastUpdated = player[0].last_updated
-    const updatePlayerQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE opaque_user_id = $2 and channel_id = $3'
+    let singlePlayer = player[0]
+    const updatePlayerQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE user_id = $2 and channel_id = $3'
     //update players table to decrease points and increase stat
-    await client.query(updatePlayerQuery, [player.points-cost, currentOpaqueUserId, channelId, player.attack_stat + differenceStat['attack'], 
-        player.jump_stat + differenceStat['jump'], player.shield_stat + differenceStat['shield'], player.focus_stat + differenceStat['focus']])
-        const updatedPlayer = {...player,
-                                points_to_spend:Number(player.points_to_spend) - cost,
-                                attack_stat: Number(player.attack_stat) + Number(differenceStat['attack']),
-                                jump_stat: Number(player.jump_stat) + Number(differenceStat['jump']),
-                                shield_stat: Number(player.shield_stat) + Number(differenceStat['shield']),
-                                focus_stat: Number(player.focus_stat) + Number(differenceStat['focus']),
-                                success: success
-                            }
+    if (singlePlayer.points_to_spend >= upgradedValue) {
+        await client.query(updatePlayerQuery, 
+            [Number(singlePlayer.points_to_spend) - Number(cost), 
+            currentUserId, 
+            channelId, 
+            Number(singlePlayer.attack_stat) + Number(differenceStat['attack']), 
+            Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
+            Number(singlePlayer.shield_stat) + Number(differenceStat['shield']), 
+            Number(singlePlayer.focus_stat) + Number(differenceStat['focus'])]
+        );
+            const updatedPlayer = {...player,
+                                    points_to_spend:Number(singlePlayer.points_to_spend) - Number(cost),
+                                    attack_stat: Number(singlePlayer.attack_stat) + Number(differenceStat['attack']),
+                                    jump_stat: Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
+                                    shield_stat: Number(singlePlayer.shield_stat) + Number(differenceStat['shield']),
+                                    focus_stat: Number(singlePlayer.focus_stat) + Number(differenceStat['focus']),
+                                    success: success
+                                }
        return res.status(200).json(updatedPlayer)
+    } else {
+        const updatedPlayer = {...player,
+            points_to_spend:Number(singlePlayer.points_to_spend),
+            attack_stat: Number(singlePlayer.attack_stat) + Number(differenceStat['attack']),
+            jump_stat: Number(singlePlayer.jump_stat) + Number(differenceStat['jump']),
+            shield_stat: Number(singlePlayer.shield_stat) + Number(differenceStat['shield']),
+            focus_stat: Number(singlePlayer.focus_stat) + Number(differenceStat['focus']),
+            success: success
+        }
+        return res.status(200).json(updatedPlayer)
+    }
    
 })
 

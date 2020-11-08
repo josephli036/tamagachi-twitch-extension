@@ -7,7 +7,7 @@
           :size="100"
           :width="15"
           :value="counter"
-          color="primary"
+          color="teal lighten-3"
         >
           {{ counter }}
         </v-progress-circular>

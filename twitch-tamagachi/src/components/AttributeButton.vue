@@ -4,7 +4,7 @@
       direction="left"
       transition="slide-x-reverse-transition"
       style="padding-bottom: 4px"
-      open-on-hover="true"
+      open-on-hover
     >
       <template v-slot:activator>
         <v-btn :color="color" dark fab small depressed>

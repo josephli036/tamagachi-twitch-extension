@@ -27,8 +27,7 @@ export default {
   mounted() {},
   methods: {
     onUpgrade({attribute, type}) {
-      console.log(window.Twitch.ext.viewer);
-      BackendApi.upgrade(1234, 4321, attribute, type, 'asdfsadf').then(data => {
+      BackendApi.upgrade(window.Twitch.ext.viewer.idd, window.channelId, attribute, type, window.authToken).then(data => {
         console.log(data);
       });
     },

@@ -27,14 +27,14 @@ export default {
   mounted() {},
   methods: {
     onUpgrade({attribute, type}) {
-      BackendApi.upgrade(window.Twitch.ext.viewer.idd, window.channelId, attribute, type, window.authToken).then(data => {
+      BackendApi.upgrade(window.Twitch.ext.viewer.id, window.channelId, attribute, type, window.authToken).then(data => {
         console.log(data);
       });
     },
 
     updatePoints() {
       setInterval(() => {
-        BackendApi.updatePoints(window.Twitch.ext.viewer.idd, window.channelId, window.authToken)
+        BackendApi.updatePoints(window.Twitch.ext.viewer.id, window.channelId, window.authToken)
       }, 10000)
     }
   },

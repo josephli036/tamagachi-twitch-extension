@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const APP_PORT = 3000
+const APP_PORT = process.env.PORT || 3000
 
 const PG_DATABASE = process.env.RDS_PGDB
 const PG_HOSTNAME = process.env.RDS_HOSTNAME

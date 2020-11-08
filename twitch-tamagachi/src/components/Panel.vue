@@ -5,7 +5,11 @@
         <v-spacer></v-spacer>
         <div class="d-flex">
           <v-spacer></v-spacer>
-          <div class="pa-0"><upgrade-button /></div>
+          <div class="pa-0">
+            <upgrade
+              @upgrade="onUpgrade"
+            />
+          </div>
         </div>
       </div>
     </v-overlay>

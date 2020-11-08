@@ -52,7 +52,7 @@ upgradesRouter.post('/attempt', async (req,res) => {
     let singlePlayer = player[0]
     const updatePlayerQuery = 'UPDATE players SET points_to_spend = $1, attack_stat = $4, jump_stat = $5, shield_stat = $6, focus_stat = $7 WHERE user_id = $2 and channel_id = $3'
     //update players table to decrease points and increase stat
-    if (singlePlayer.points_to_spend >= upgradedValue) {
+    if (singlePlayer.points_to_spend >= cost) {
         await client.query(updatePlayerQuery, 
             [Number(singlePlayer.points_to_spend) - Number(cost), 
             currentUserId, 
